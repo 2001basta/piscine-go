@@ -1,0 +1,30 @@
+package main
+
+import (
+	"fmt"
+	"io"
+	"os"
+)
+
+func main() {
+	args := os.Args[1:]
+	if 0 == len(args) {
+		fmt.Println()
+	} else {
+		for _, s := range os.Args[1:] {
+			file, err := os.Open(s)
+			if err != nil {
+				fmt.Println(err.Error())
+				break
+			} else {
+				data, err := io.ReadAll(file)
+				if err != nil {
+					fmt.Print(err.Error())
+					break
+				} else {
+					fmt.Printf("%s", data)
+				}
+			}
+		}
+	}
+}
